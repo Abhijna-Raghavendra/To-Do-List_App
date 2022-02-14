@@ -1,6 +1,8 @@
 //This is a To-do List App
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'list_element.dart';
+import 'my_list_class.dart';
 
 void main() {
   runApp(const ToDoApp());
@@ -14,7 +16,7 @@ class ToDoApp extends StatefulWidget {
 }
 
 class _ToDoAppState extends State<ToDoApp> {
-  List<String> myList = [];
+  List<ToDo> toDoList = [];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -44,12 +46,19 @@ class _ToDoAppState extends State<ToDoApp> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: myList.map((listItem) => Text(listItem)).toList(),
+          children: toDoList.map((task) => ListElement(
+            task: task,
+            delete: (){
+              setState(() {
+                toDoList.remove(task);
+              });
+            },
+          )).toList(),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: (){
             setState(() {
-              myList.add("Here is a to-do");
+              toDoList.add(ToDo('new activity',false));
             });
           },
           child: Icon(
