@@ -1,9 +1,7 @@
 class ToDo{
   String text="";
-  bool state=false;
-  ToDo(String text,bool state)
+  ToDo(String text)
   {
     this.text = text;
-    this.state = state;
   }
 }
